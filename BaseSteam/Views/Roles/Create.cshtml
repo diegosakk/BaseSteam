@@ -3,14 +3,17 @@
     ViewData["Title"] = "Crear Roles";
 }
 
-<h1>Crear roles</h1>
+
 <div>
-    <form asp-action="Create">
+    <form asp-action="Create" class="col-lg-6 offset-lg-3">
+
+        <h1>Crear roles</h1>
+
         <label class="form-label">Nombre</label>
         <input type="text" class="form-control" asp-for="Nombre" />
-        <label class="form-label">Permisos</label>
+        <label class="form-label mt-3">Permisos</label>
         <input type="text" class="form-control" asp-for="Permisos" />
-        <input type="submit" value="Crear" class="btn btn-outline-success" />
-        <a asp-action="index" class="btn btn-outline-primary">index roles</a>
+        <input type="submit" value="Crear" class="btn btn-outline-success mt-3" />
+        <a asp-action="index" class="btn btn-outline-primary mt-3">index roles</a>
     </form>
 </div>

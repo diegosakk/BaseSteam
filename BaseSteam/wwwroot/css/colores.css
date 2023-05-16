@@ -1,0 +1,13 @@
+﻿.color-primario {
+    background-color: #FF715B;
+}
+
+.color-secundario {
+    color: #1EA896;
+}
+.fondo {
+    background-color: #4C5454;
+}
+.sombra {
+    text-shadow: 2px 2px #ff0000;
+}
