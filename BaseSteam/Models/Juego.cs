@@ -28,4 +28,7 @@ public partial class Juego
     public virtual Editor EditorNavigation { get; set; } = null!;
 
     public virtual Usuario UsuarioRegistradoNavigation { get; set; } = null!;
+    public virtual Categorium IdCategoriaNavigation { get; set; } = null!;
+    public virtual Desarrollador IdDesarrolladorNavigation { get; set; } = null!;
+    public virtual Editor IdEditorNavigation { get; set; } = null!;
 }

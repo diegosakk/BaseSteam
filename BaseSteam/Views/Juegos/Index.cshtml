@@ -1,5 +1,42 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<BaseSteam.Models.Juego>
 @{
 }
+<h1>Lista Juegos</h1>
+<hr />
+<div class="text-end">
+    <a asp-action="Create" class="btn btn-outline-primary">Crear</a>
+</div>
+<table class="table table-bordered">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Categoria</th>
+            <th>Desarrollador</th>
+            <th>Editor</th>
+            <th>Plataforma</th>
+            <th>Precio</th>
+            <th>Usuario</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Nombre</td>
+                <td>@item.IdCategoriaNavigation.Nombre</td>
+                <td>@item.IdDesarrolladorNavigation.Nombre</td>
+                <td>@item.IdEditorNavigation.Nombre</td>
+                <td>@item.Plataforma</td>
+                <td>@item.Precio</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

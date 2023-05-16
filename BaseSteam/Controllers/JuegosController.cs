@@ -1,6 +1,7 @@
 ﻿using BaseSteam.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseSteam.Controllers
 {
@@ -9,13 +10,17 @@ namespace BaseSteam.Controllers
         private BaseSteamContext db = new();
         public IActionResult Index()
         {
-            return View(db.Categoria.ToList());
+            var juegos = db.Juegos.Include(p => p.IdCategoriaNavigation)
+                    .Include(p => p.IdDesarrolladorNavigation)
+                    .Include(p => p.IdEditorNavigation);
+            return View(juegos);
 
         }
         public IActionResult Create()
         {
             ViewData["IdCategoria"] = new SelectList(db.Categoria, "Id", "Nombre");
             ViewData["IdDesarrollador"] = new SelectList(db.Desarrolladors, "Id", "Nombre");
+            ViewData["IdEditor"] = new SelectList(db.Editors, "Id", "Nombre");
             return View();
         }
         [HttpPost]
@@ -24,7 +29,7 @@ namespace BaseSteam.Controllers
             db.Add(juego);
             db.SaveChanges();
             //return View();
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
         public IActionResult Edit(int? id)
         {
@@ -33,14 +38,14 @@ namespace BaseSteam.Controllers
             {
                 return View(juego);
             }
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
         [HttpPost]
         public IActionResult Edit(Juego juego)
         {
             db.Update(juego);
             db.SaveChanges();
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
         public IActionResult Delete(int? id)
         {
@@ -53,7 +58,7 @@ namespace BaseSteam.Controllers
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
     }
 }
