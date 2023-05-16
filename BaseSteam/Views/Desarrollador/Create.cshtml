@@ -1,0 +1,19 @@
+﻿@model BaseSteam.Models.Desarrollador
+@{
+    ViewData["Title"] = "Crear Desarrolladoe";
+}
+
+<h1>Crear desarrollador</h1>
+<div>
+    <form asp-action="Create">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" asp-for="Nombre" />
+        <label class="form-label">Pais</label>
+        <input type="text" class="form-control" asp-for="Pais" />
+        <input type="submit" value="Crear" class="btn btn-outline-success" />
+        <a asp-action="index" class="btn btn-outline-primary">index marca</a>
+    </form>
+</div>
+
+
+<!-- Path: Vie
