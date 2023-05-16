@@ -1,9 +1,9 @@
-﻿@model BaseSteam.Models.Desarrollador
+﻿@model BaseSteam.Models.Editor
 @{
-    ViewData["Title"] = "Crear Desarrolladoe";
+    ViewData["Title"] = "Crear Editor";
 }
 
-<h1>Crear desarrollador</h1>
+<h1>Crear editor</h1>
 <div>
     <form asp-action="Create">
         <label class="form-label">Nombre</label>
@@ -11,6 +11,7 @@
         <label class="form-label">Pais</label>
         <input type="text" class="form-control" asp-for="Pais" />
         <input type="submit" value="Crear" class="btn btn-outline-success" />
-        <a asp-action="index" class="btn btn-outline-primary">index Desarrollador</a>
+        <a asp-action="index" class="btn btn-outline-primary">index Editor</a>
     </form>
 </div>
+

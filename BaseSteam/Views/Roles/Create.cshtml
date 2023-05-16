@@ -1,0 +1,16 @@
+﻿@model BaseSteam.Models.Role
+@{
+    ViewData["Title"] = "Crear Roles";
+}
+
+<h1>Crear roles</h1>
+<div>
+    <form asp-action="Create">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" asp-for="Nombre" />
+        <label class="form-label">Permisos</label>
+        <input type="text" class="form-control" asp-for="Permisos" />
+        <input type="submit" value="Crear" class="btn btn-outline-success" />
+        <a asp-action="index" class="btn btn-outline-primary">index roles</a>
+    </form>
+</div>
