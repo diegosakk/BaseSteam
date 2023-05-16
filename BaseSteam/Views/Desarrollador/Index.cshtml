@@ -1,32 +1,32 @@
 ﻿@model IEnumerable<BaseSteam.Models.Desarrollador>
-<div>
+
+<div class="text-end">
+    <a asp-action="Create" class="btn btn-primary">Crear Desarrollador</a>
 </div>
+
 <table class="table">
     <thead>
         <tr>
-            <th>id</th>
-            <th>Nombre</th>
-            <th>Pais</th>
+            <th>ID</th>
+            <th>Categoria</th>
+            <th>Descripcion</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td> @item.Id</td>
+                <td>@item.Id</td>
                 <td>@item.Nombre</td>
-                <td>@item.Pais</td>
+                <td>@item.Descripcion</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"
+                       class="btn btn-warning"><i class="bi bi-pencil-square"> </i>Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id"
+                       class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</a>
                 </td>
             </tr>
-
-
         }
-
-
-
     </tbody>
 </table>
-<a asp-action="create" class="btn btn-outline-primary">Crear Desarrollador</a>

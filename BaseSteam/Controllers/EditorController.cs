@@ -21,7 +21,7 @@ namespace BaseSteam.Controllers
             db.Add(editor);
             db.SaveChanges();
             //return View();
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
         public IActionResult Edit(int? id)
         {
