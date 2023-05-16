@@ -1,0 +1,24 @@
+﻿@model BaseSteam.Models.Juego
+@{
+    ViewData["Title"] = "Crear Juego";
+}
+
+<h1>Crear Juego</h1>
+<div>
+    <form asp-action="Create">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" asp-for="Nombre" />
+        <label>Marca</label>
+        <select asp-for="Categoria" class="form-select" asp-items="ViewBag.IdCategoria"></select>
+        <label>Proveedor</label>
+        <select asp-for="Desarrollador" class="form-control" asp-items="ViewBag.IdDesarrollador"></select>
+        <label class="form-label">Editor</label>
+        <input type="text" class="form-control" asp-for="Editor" />
+        <label class="form-label">Plataforma</label>
+        <input type="text" class="form-control" asp-for="Plataforma" />
+        <label class="form-label">Precio</label>
+        <input type="text" class="form-control" asp-for="Precio" />
+        <input type="submit" value="Crear" class="btn btn-outline-success" />
+        <a asp-action="index" class="btn btn-outline-primary">index Categoria</a>
+    </form>
+</div>
