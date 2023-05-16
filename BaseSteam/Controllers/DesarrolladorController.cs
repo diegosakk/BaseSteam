@@ -44,10 +44,10 @@ namespace BaseSteam.Controllers
         {
             if (id != null)
             {
-                var marca = db.Desarrolladors.Find(id);
-                if (marca != null)
+                var desarrollador = db.Desarrolladors.Find(id);
+                if (desarrollador != null)
                 {
-                    db.Desarrolladors.Remove(marca);
+                    db.Desarrolladors.Remove(desarrollador);
                     db.SaveChanges();
                 }
             }

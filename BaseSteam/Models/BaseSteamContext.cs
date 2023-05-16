@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,7 @@ public partial class BaseSteamContext : DbContext
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
+    public IEnumerable Usuario { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -92,17 +94,17 @@ public partial class BaseSteamContext : DbContext
             entity.Property(e => e.Precio).HasColumnName("precio");
             entity.Property(e => e.UsuarioRegistrado).HasColumnName("usuario_registrado");
 
-            entity.HasOne(d => d.CategoriaNavigation).WithMany(p => p.Juegos)
+            entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Juegos)
                 .HasForeignKey(d => d.Categoria)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Juegos_Categoria");
 
-            entity.HasOne(d => d.DesarrolladorNavigation).WithMany(p => p.Juegos)
+            entity.HasOne(d => d.IdDesarrolladorNavigation).WithMany(p => p.Juegos)
                 .HasForeignKey(d => d.Desarrollador)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Juegos_Desarrollador");
 
-            entity.HasOne(d => d.EditorNavigation).WithMany(p => p.Juegos)
+            entity.HasOne(d => d.IdEditorNavigation).WithMany(p => p.Juegos)
                 .HasForeignKey(d => d.Editor)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Juegos_Editor");

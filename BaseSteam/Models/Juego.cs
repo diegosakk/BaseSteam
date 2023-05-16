@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BaseSteam.Models;
+﻿namespace BaseSteam.Models;
 
 public partial class Juego
 {
@@ -20,14 +17,9 @@ public partial class Juego
     public int Precio { get; set; }
 
     public int UsuarioRegistrado { get; set; }
-
-    public virtual Categorium CategoriaNavigation { get; set; } = null!;
-
-    public virtual Desarrollador DesarrolladorNavigation { get; set; } = null!;
-
-    public virtual Editor EditorNavigation { get; set; } = null!;
-
     public virtual Usuario UsuarioRegistradoNavigation { get; set; } = null!;
+    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+
     public virtual Categorium IdCategoriaNavigation { get; set; } = null!;
     public virtual Desarrollador IdDesarrolladorNavigation { get; set; } = null!;
     public virtual Editor IdEditorNavigation { get; set; } = null!;

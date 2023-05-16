@@ -12,7 +12,9 @@ namespace BaseSteam.Controllers
         {
             var juegos = db.Juegos.Include(p => p.IdCategoriaNavigation)
                     .Include(p => p.IdDesarrolladorNavigation)
-                    .Include(p => p.IdEditorNavigation);
+                    .Include(p => p.IdEditorNavigation)
+                    .Include(p => p.IdUsuarioNavigation);
+            ;
             return View(juegos);
 
         }
@@ -21,6 +23,8 @@ namespace BaseSteam.Controllers
             ViewData["IdCategoria"] = new SelectList(db.Categoria, "Id", "Nombre");
             ViewData["IdDesarrollador"] = new SelectList(db.Desarrolladors, "Id", "Nombre");
             ViewData["IdEditor"] = new SelectList(db.Editors, "Id", "Nombre");
+            ViewData["IdUsuario"] = new SelectList(db.Usuario, "Id", "Nombre");
+
             return View();
         }
         [HttpPost]
