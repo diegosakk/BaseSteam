@@ -5,15 +5,15 @@
 
 
 <div>
-    <form asp-action="Create" class="col-lg-6 offset-lg-3">
+    <form asp-action="Create" class="col-lg-6 offset-lg-3" id="formulario">
 
         <h1>Crear desarrollador</h1>
 
         <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" asp-for="Nombre" />
+        <input type="text" class="form-control" asp-for="Nombre" id="Nombre" />
         <label class="form-label mt-3">Pais</label>
-        <input type="text" class="form-control" asp-for="Pais" />
-        <input type="submit" value="Crear" class="btn btn-outline-success mt-3" />
+        <input type="text" class="form-control" asp-for="Pais"  id="Pais" />
+        <input type="submit" value="Crear" class="btn btn-outline-success mt-3" id="btnAgregar" />
         <a asp-action="index" class="btn btn-outline-primary mt-3">index Desarrollador</a>
     </form>
 </div>

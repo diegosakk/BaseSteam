@@ -1,5 +1,6 @@
-﻿using BaseSteam.Models;
+using BaseSteam.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseSteam.Controllers
@@ -9,17 +10,18 @@ namespace BaseSteam.Controllers
         private BaseSteamContext db = new();
         public IActionResult Index()
         {
-            var usuario = db.Usuarios.Include(p => p.IdRolesNavigation);
-            return View(db.Roles.ToList());
-
+            var usuarios = db.Usuarios.Include(u => u.RolesNavigation);
+            return View(usuarios);
         }
         public IActionResult Create()
         {
+            ViewData["Rolesss"] = new SelectList(db.Roles, "Id", "Nombre");
             return View();
         }
         [HttpPost]
         public IActionResult Create(Usuario usuario)
         {
+
             db.Add(usuario);
             db.SaveChanges();
             //return View();
