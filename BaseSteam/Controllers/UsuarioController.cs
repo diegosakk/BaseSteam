@@ -21,11 +21,9 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Create(Usuario usuario)
         {
-
-            db.Add(usuario);
+            db.Usuarios.Add(usuario);
             db.SaveChanges();
-            //return View();
-            return RedirectToAction("index");
+            return RedirectToAction("Index");
         }
         public IActionResult Edit(int? id)
         {
