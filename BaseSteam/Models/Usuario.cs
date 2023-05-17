@@ -17,7 +17,9 @@ public partial class Usuario
 
     public int? Roles { get; set; }
 
+    public int RolRegistrado { get; set; }
+
     public virtual ICollection<Juego> Juegos { get; set; } = new List<Juego>();
 
-    public virtual Role? RolesNavigation { get; set; }
+    public virtual Role IdRolesNavigation { get; set; } = null!; 
 }

@@ -1,0 +1,25 @@
+﻿@model BaseSteam.Models.Usuario
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+
+<div>
+    <form asp-action="Create" class="col-lg-6 offset-lg-3">
+
+        <h1>Crear Usuarios</h1>
+
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" asp-for="Nombre" />
+        <label class="form-label mt-3">RUT</label>
+        <input type="text" class="form-control" asp-for="Rut" />
+        <label class="form-label mt-3">Correo</label>
+        <input type="text" class="form-control" asp-for="Correo" />
+        <label class="form-label mt-3">Telefono</label>
+        <input type="text" class="form-control" asp-for="Telefono" />
+        <label class="form-label mt-3">Roles</label>
+        <select asp-for="IdRolesNavigation" class="form-control" asp-items="ViewBag.IdRoles"></select>
+        <input type="submit" value="Crear" class="btn btn-outline-success mt-3" />
+        <a asp-action="index" class="btn btn-outline-primary mt-3">index roles</a>
+    </form>
+</div>

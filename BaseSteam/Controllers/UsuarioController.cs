@@ -1,5 +1,6 @@
 ﻿using BaseSteam.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BaseSteam.Controllers
 {
@@ -8,6 +9,7 @@ namespace BaseSteam.Controllers
         private BaseSteamContext db = new();
         public IActionResult Index()
         {
+            var usuario = db.Usuarios.Include(p => p.IdRolesNavigation);
             return View(db.Roles.ToList());
 
         }
@@ -16,26 +18,26 @@ namespace BaseSteam.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Role role)
+        public IActionResult Create(Usuario usuario)
         {
-            db.Add(role);
+            db.Add(usuario);
             db.SaveChanges();
             //return View();
             return RedirectToAction("index");
         }
         public IActionResult Edit(int? id)
         {
-            var role = db.Roles.Find(id);
+            var usuario = db.Roles.Find(id);
             if (id != null)
             {
-                return View(role);
+                return View(usuario);
             }
             return RedirectToAction("index");
         }
         [HttpPost]
-        public IActionResult Edit(Role role)
+        public IActionResult Edit(Usuario usuario)
         {
-            db.Update(role);
+            db.Update(usuario);
             db.SaveChanges();
             return RedirectToAction("index");
         }
@@ -43,10 +45,10 @@ namespace BaseSteam.Controllers
         {
             if (id != null)
             {
-                var role = db.Roles.Find(id);
-                if (role != null)
+                var usuario = db.Usuarios.Find(id);
+                if (usuario != null)
                 {
-                    db.Roles.Remove(role);
+                    db.Usuarios.Remove(usuario);
                     db.SaveChanges();
                 }
             }
