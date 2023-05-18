@@ -56,9 +56,19 @@ namespace BaseSteam.Controllers
         public IActionResult Edit(Usuario usuario)
         {
             ViewData["IdRoles"] = new SelectList(db.Roles, "Id", "Nombre");
+            var existe = db.Usuarios.Any(c => c.Nombre == usuario.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un usuario con el mismo nombre.";
+                return RedirectToAction("Edit");
+            }
+
             db.Update(usuario);
             db.SaveChanges();
-            return RedirectToAction("index");
+            TempData["SuccessMessage"] = "usuario modificiado exitosamente.";
+
+            return RedirectToAction("Edit");
         }
         public IActionResult Delete(int? id)
         {
