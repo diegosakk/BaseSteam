@@ -46,9 +46,21 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Edit(Categorium categoria)
         {
-            db.Update(categoria);
-            db.SaveChanges();
-            return RedirectToAction("index");
+            var existe = db.Categoria.Any(c => c.Nombre == categoria.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe una categoria con el mismo nombre.";
+                return RedirectToAction("Edit");
+            }
+            else
+            {
+                db.Update(categoria);
+                db.SaveChanges();
+                TempData["SuccessMessage"] = "Categoria modficiada exitosamente.";
+            }
+            
+            return RedirectToAction("Edit");
         }
         public IActionResult Delete(int? id)
         {
