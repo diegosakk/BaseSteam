@@ -37,6 +37,11 @@ namespace BaseSteam.Controllers
         }
         public IActionResult Edit(int? id)
         {
+
+            ViewData["IdCategoria"] = new SelectList(db.Categoria, "Id", "Nombre");
+            ViewData["IdDesarrollador"] = new SelectList(db.Desarrolladors, "Id", "Nombre");
+            ViewData["IdEditor"] = new SelectList(db.Editors, "Id", "Nombre");
+            ViewData["IdUsuario"] = new SelectList(db.Usuarios, "Id", "Nombre");
             var juego = db.Juegos.Find(id);
             if (id != null)
             {
@@ -47,6 +52,11 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Edit(Juego juego)
         {
+
+            ViewData["IdCategoria"] = new SelectList(db.Categoria, "Id", "Nombre");
+            ViewData["IdDesarrollador"] = new SelectList(db.Desarrolladors, "Id", "Nombre");
+            ViewData["IdEditor"] = new SelectList(db.Editors, "Id", "Nombre");
+            ViewData["IdUsuario"] = new SelectList(db.Usuarios, "Id", "Nombre");
             db.Update(juego);
             db.SaveChanges();
             return RedirectToAction("Index");

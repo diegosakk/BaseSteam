@@ -1,0 +1,45 @@
+﻿@model BaseSteam.Models.Juego
+@{
+    ViewData["Title"] = "Edit";
+}
+<h1>Editar Juego</h1>
+<div>
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" asp-for="Nombre" />
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <label class="form-label">Desarrollador</label>
+                <select asp-for="Desarrollador" class="form-select" asp-items="ViewBag.IdDesarrollador"></select>
+            </div>
+            <label class="form-label">Editor</label>
+            <select asp-for="Editor" class="form-select" asp-items="ViewBag.IdEditor"></select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Categoria</label>
+            <select asp-for="Categoria" class="form-select" asp-items="ViewBag.IdCategoria"></select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Usuario</label>
+            <select asp-for="UsuarioRegistrado" class="form-select" asp-items="ViewBag.IdUsuario"></select>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Plataforma</label>
+            <input type="text" class="form-control" asp-for="Plataforma" />
+        </div>
+        <div class="form-group">
+            <label class="form-label">Precio</label>
+            <input type="text" class="form-control" asp-for="Precio" />
+        </div>
+        <div class="mt-3 text-end">
+            <a asp-action="Index" class="btn btn-outline-info">volver</a>
+            <input type="submit" class="btn btn-outline-info" value="Edit" />
+
+
+        </div>
+
+    </form>
+</div>

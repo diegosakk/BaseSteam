@@ -33,7 +33,8 @@ namespace BaseSteam.Controllers
         }
         public IActionResult Edit(int? id)
         {
-            var usuario = db.Roles.Find(id);
+            ViewData["IdRoles"] = new SelectList(db.Roles, "Id", "Nombre");
+            var usuario = db.Usuarios.Find(id);
             if (id != null)
             {
                 return View(usuario);
@@ -43,6 +44,7 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Edit(Usuario usuario)
         {
+            ViewData["IdRoles"] = new SelectList(db.Roles, "Id", "Nombre");
             db.Update(usuario);
             db.SaveChanges();
             return RedirectToAction("index");
