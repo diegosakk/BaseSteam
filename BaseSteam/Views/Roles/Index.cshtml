@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<BaseSteam.Models.Role>
-<div>
+<div class="text-end">
+    <a asp-action="create" class="btn btn-outline-primary">Crear Desarrollador</a>
 </div>
 <table class="table">
     <thead>
@@ -7,6 +8,7 @@
             <th>id</th>
             <th>Nombre</th>
             <th>Permisos</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -29,5 +31,5 @@
 
     </tbody>
 </table>
-<a asp-action="create" class="btn btn-outline-primary">Crear Desarrollador</a>
+
 
