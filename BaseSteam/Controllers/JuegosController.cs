@@ -67,9 +67,19 @@ namespace BaseSteam.Controllers
             ViewData["IdDesarrollador"] = new SelectList(db.Desarrolladors, "Id", "Nombre");
             ViewData["IdEditor"] = new SelectList(db.Editors, "Id", "Nombre");
             ViewData["IdUsuario"] = new SelectList(db.Usuarios, "Id", "Nombre");
+            var existe = db.Juegos.Any(c => c.Nombre == juego.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un juego con el mismo nombre.";
+                return RedirectToAction("Edit");
+            }
+
             db.Update(juego);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["SuccessMessage"] = "juego modificado exitosamente.";
+
+            return RedirectToAction("Edit");
         }
         public IActionResult Delete(int? id)
         {

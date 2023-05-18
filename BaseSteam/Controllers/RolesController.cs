@@ -46,9 +46,20 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Edit(Role role)
         {
+
+            var existe = db.Roles.Any(c => c.Nombre == role.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un rol con el mismo nombre.";
+                return RedirectToAction("Edit");
+            }
+
             db.Update(role);
             db.SaveChanges();
-            return RedirectToAction("index");
+            TempData["SuccessMessage"] = "rol modificado exitosamente.";
+
+            return RedirectToAction("Edit");
         }
         public IActionResult Delete(int? id)
         {

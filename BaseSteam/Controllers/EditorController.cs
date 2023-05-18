@@ -45,9 +45,20 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Edit(Editor editor)
         {
+
+            var existe = db.Editors.Any(c => c.Nombre == editor.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un editor con el mismo nombre.";
+                return RedirectToAction("Edit");
+            }
+
             db.Update(editor);
             db.SaveChanges();
-            return RedirectToAction("index");
+            TempData["SuccessMessage"] = "editor modificado exitosamente.";
+
+            return RedirectToAction("Edit");
         }
         public IActionResult Delete(int? id)
         {
