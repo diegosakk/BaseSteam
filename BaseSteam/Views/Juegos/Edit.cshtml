@@ -8,7 +8,7 @@
 }
 <div class="container">
     <div class="card mt-4 rounded-0 mx-auto color-secundario " style="width: 50rem;">
-    <form asp-action="Edit" class="col-lg-6 offset-lg-3">
+    <form asp-action="Edit" class="col-lg-6 offset-lg-3" id="formulario">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label class="form-label">Nombre</label>
@@ -82,8 +82,7 @@
     }
 
     function limpiarCampos() {
-        $('#Nombre').val('');
-        $('#Descripcion').val('');
+        document.getElementById("formulario").reset();
     }
 </script>
 
