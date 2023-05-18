@@ -7,25 +7,28 @@
     var successMessage = TempData["SuccessMessage"] as string;
 }
 
-<h1>Crear Producto</h1>
-<div class="row">
-    <form asp-action="Create" id="formulario">
-        <label>Nombre</label>
+
+<div class="container">
+    <div class="card mt-4 rounded-0 mx-auto color-secundario " style="width: 50rem;">
+        <h1 class="mx-3 mt-3">Crear Usuario</h1>
+    <form asp-action="Create" class="col-lg-6 offset-lg-3" id="formulario" >
+        <label class="form-label mt-3">Nombre</label>
         <input asp-for="Nombre" class="form-control required-field" required />
-        <label>Rut</label>
+        <label class="form-label mt-3">Rut</label>
         <input asp-for="Rut" class="form-control required-field" required pattern="^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$" title="Ingrese un RUT válido (ejemplo: 12.345.678-9)" />
-        <label>Roles</label>
+        <label class="form-label mt-3">Roles</label>
         <select asp-for="Roles" class="form-select required-field" asp-items="ViewBag.IdRoles"></select>
-        <label>Teléfono</label>
+        <label class="form-label mt-3">Teléfono</label>
         <input asp-for="Telefono" type="number" class="form-control required-field" minlength="10" min="1" required />
-        <label>Correo</label>
+        <label class="form-label mt-3">Correo</label>
         <input asp-for="Correo" type="email" class="form-control required-field" required />
 
         <div class="text-end mt-3">
-            <input type="submit" value="Crear" class="btn btn-outline-success mt-3" id="btnAgregar" onclick="return confirmarGuardado()" />
-            <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3" id="btnLimpiar" onclick="return limpiarCampos()" />
+                <input type="submit" value="Crear" class="btn btn-outline-success mt-3 mb-3" id="btnAgregar" onclick="return confirmarGuardado()" />
+            <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3 mb-3" id="btnLimpiar" onclick="return limpiarCampos()" />
         </div>
     </form>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -111,5 +114,4 @@
             confirmButtonText: 'Aceptar'
         });
     </script>
-}
 }

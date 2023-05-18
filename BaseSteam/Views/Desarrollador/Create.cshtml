@@ -7,17 +7,20 @@
     var successMessage = TempData["SuccessMessage"] as string;
 }
 
-<div>
+<div class="container">
+    <div class="card mt-4 rounded-0 mx-auto color-secundario " style="width: 50rem;">
+        <h1 class="mx-3 mt-3">Crear Desarrollador</h1>
     <form asp-action="Create" class="col-lg-6 offset-lg-3" id="formulario">
-        <h1>Crear desarrollador</h1>
+
         <label class="form-label">Nombre</label>
         <input type="text" class="form-control required-field" asp-for="Nombre" id="Nombre" maxlength="50" required />
         <label class="form-label mt-3">Pais</label>
         <input type="text" class="form-control required-field" asp-for="Pais" id="Pais" maxlength="50" required />
-        <input type="submit" value="Crear" class="btn btn-outline-success mt-3" id="btnAgregar" onclick="return confirmarGuardado()" />
-        <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3" id="btnLimpiar" onclick="return limpiarCampos()" />
-        <a asp-action="index" class="btn btn-outline-primary mt-3">index Desarrollador</a>
+            <input type="submit" value="Crear" class="btn btn-outline-success mt-3 mb-3" id="btnAgregar" onclick="return confirmarGuardado()" />
+            <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3 mb-3" id="btnLimpiar" onclick="return limpiarCampos()" />
+            <a asp-action="index" class="btn btn-outline-primary mt-3 mb-3">Volver a Index</a>
     </form>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

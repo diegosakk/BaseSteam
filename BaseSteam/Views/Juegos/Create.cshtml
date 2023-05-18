@@ -7,29 +7,31 @@
     var successMessage = TempData["SuccessMessage"] as string;
 }
 
-<div>
+<div class="container">
+    <div class="card mt-4 rounded-0 mx-auto color-secundario " style="width: 50rem;">
+        <h1 class="mx-3 mt-3">Crear Juego</h1>
     <form asp-action="Create" class="col-lg-6 offset-lg-3" id="formulario">
 
-        <h1>Crear Juego</h1>
 
         <label class="form-label">Nombre</label>
         <input type="text" class="form-control required-field" id="nombre" required asp-for="Nombre" />
-        <label>Categoria</label>
+        <label class="form-label mt-3">Categoria</label>
         <select asp-for="Categoria"  class="form-select required-field" asp-items="ViewBag.IdCategoria"></select>
-        <label>Proveedor</label>
+        <label class="form-label mt-3">Proveedor</label>
         <select asp-for="Desarrollador" class="form-control required-field" id="desarrollador"   asp-items="ViewBag.IdDesarrollador"></select>
-        <label class="form-label">Editor</label>
+        <label class="form-label mt-3">Editor</label>
         <select asp-for="Editor" class="form-control required-field" id="editor" asp-items="ViewBag.IdEditor"></select>
-        <label class="form-label">Plataforma</label>
+        <label class="form-label mt-3">Plataforma</label>
         <input type="text" class="form-control required-field" required id="Plataforma" asp-for="Plataforma" />
-        <label class="form-label">Precio</label>
+        <label class="form-label mt-3">Precio</label>
         <input type="text" class="form-control required-field" required id="Precio" asp-for="Precio" />
-        <label class="form-label">Editor</label>
+        <label class="form-label mt-3">Editor</label>
         <select asp-for="UsuarioRegistrado" class="form-control required-field" asp-items="ViewBag.IdUsuario"></select>
-        <input type="submit" value="Crear" class="btn btn-outline-success mt-3" id="btnAgregar" onclick="return confirmarGuardado()" />
-        <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3" id="btnLimpiar" onclick="return limpiarCampos()" />
-        <a asp-action="index" class="btn btn-outline-primary">index Categoria</a>
+            <input type="submit" value="Crear" class="btn btn-outline-success mt-3 mb-3" id="btnAgregar" onclick="return confirmarGuardado()" />
+            <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3 mb-3" id="btnLimpiar" onclick="return limpiarCampos()" />
+            <a asp-action="index" class="btn btn-outline-primary mt-3 mb-3">Volver a Index</a>
     </form>
+</div>
 </div>
 
 

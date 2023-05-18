@@ -7,17 +7,18 @@
     var successMessage = TempData["SuccessMessage"] as string;
 }
 
-<div>
+<div class="container">
+    <div class="card mt-4 rounded-0 mx-auto color-secundario " style="width: 50rem;">
+        <h1 class="mx-3 mt-3">Crear Categoria</h1>
     <form asp-action="Create" class="col-lg-6 offset-lg-3" id="formulario">
-        <h1>Crear Categoria</h1>
         <div class="">
             <label class="form-label">Nombre</label>
             <input type="text" class="form-control required-field" id="Nombre" asp-for="Nombre" required />
             <label class="form-label mt-3">Descripcion</label>
             <input type="text" class="form-control required-field" id="Descripcion" asp-for="Descripcion" maxlength="50" required />
-            <input type="submit" value="Crear" class="btn btn-outline-success mt-3" id="btnAgregar" onclick="return confirmarGuardado()" />
-            <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3" id="btnLimpiar" onclick="return limpiarCampos()" />
-            <a asp-action="index" class="btn btn-outline-primary mt-3">index Categoria</a>
+                <input type="submit" value="Crear" class="btn btn-outline-success mt-3 mb-3" id="btnAgregar" onclick="return confirmarGuardado()" />
+                <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3 mb-3" id="btnLimpiar" onclick="return limpiarCampos()" />
+                <a asp-action="index" class="btn btn-outline-primary mt-3 mb-3">Volver a Index</a>
         </div>
     </form>
 </div>

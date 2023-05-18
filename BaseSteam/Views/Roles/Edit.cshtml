@@ -2,17 +2,21 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+}
 <h1>Editar Desarrollador</h1>
 <div>
-    <form asp-action="Edit">
+    <form asp-action="Edit" class="col-lg-6 offset-lg-3">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label class="form-label">Nombre</label>
-            <input type="text" class="form-control" asp-for="Nombre" />
+            <input type="text" class="form-control" asp-for="Nombre" maxlength="50" required />
         </div>
         <div class="form-group">
             <label class="form-label">Permisos</label>
-            <input type="text" class="form-control" asp-for="Permisos" />
+            <input type="text" class="form-control" asp-for="Permisos" maxlength="50" required />
         </div>
         <div class="mt-3 text-end">
             <a asp-action="Index" class="btn btn-outline-info">volver</a>
@@ -22,3 +26,59 @@
     </form>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmarGuardado() {
+        var requiredFields = document.getElementsByClassName('required-field');
+        var missingFields = [];
+
+        for (var i = 0; i < requiredFields.length; i++) {
+            var field = requiredFields[i];
+            if (field.value.trim() === '') {
+                var label = field.previousElementSibling.textContent;
+                missingFields.push(label);
+            }
+        }
+
+        if (missingFields.length > 0) {
+            mostrarAlerta('Los siguientes campos son obligatorios: ' + missingFields.join(', '));
+            return false;
+        }
+
+        return true;
+    }
+
+    function mostrarAlerta(mensaje) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: mensaje,
+            confirmButtonText: 'Aceptar'
+        });
+    }
+
+    function limpiarCampos() {
+        $('#Nombre').val('');
+        $('#Descripcion').val('');
+    }
+</script>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <script>
+        mostrarAlerta('@errorMessage');
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: '@successMessage',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+}
