@@ -2,28 +2,91 @@
 @{
     ViewData["Title"] = "Crear Juego";
 }
-
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+}
 
 <div>
-    <form asp-action="Create" class="col-lg-6 offset-lg-3">
+    <form asp-action="Create" class="col-lg-6 offset-lg-3" id="formulario">
 
         <h1>Crear Juego</h1>
 
         <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" asp-for="Nombre" />
+        <input type="text" class="form-control required-field" id="nombre" required asp-for="Nombre" />
         <label>Categoria</label>
-        <select asp-for="Categoria" class="form-select" asp-items="ViewBag.IdCategoria"></select>
+        <select asp-for="Categoria"  class="form-select required-field" asp-items="ViewBag.IdCategoria"></select>
         <label>Proveedor</label>
-        <select asp-for="Desarrollador" class="form-control" asp-items="ViewBag.IdDesarrollador"></select>
+        <select asp-for="Desarrollador" class="form-control required-field" id="desarrollador"   asp-items="ViewBag.IdDesarrollador"></select>
         <label class="form-label">Editor</label>
-        <select asp-for="Editor" class="form-control" asp-items="ViewBag.IdEditor"></select>
+        <select asp-for="Editor" class="form-control required-field" id="editor" asp-items="ViewBag.IdEditor"></select>
         <label class="form-label">Plataforma</label>
-        <input type="text" class="form-control" asp-for="Plataforma" />
+        <input type="text" class="form-control required-field" required id="Plataforma" asp-for="Plataforma" />
         <label class="form-label">Precio</label>
-        <input type="text" class="form-control" asp-for="Precio" />
+        <input type="text" class="form-control required-field" required id="Precio" asp-for="Precio" />
         <label class="form-label">Editor</label>
-        <select asp-for="UsuarioRegistrado" class="form-control" asp-items="ViewBag.IdUsuario"></select>
-        <input type="submit" value="Crear" class="btn btn-outline-success" />
+        <select asp-for="UsuarioRegistrado" class="form-control required-field" asp-items="ViewBag.IdUsuario"></select>
+        <input type="submit" value="Crear" class="btn btn-outline-success mt-3" id="btnAgregar" onclick="return confirmarGuardado()" />
+        <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3" id="btnLimpiar" onclick="return limpiarCampos()" />
         <a asp-action="index" class="btn btn-outline-primary">index Categoria</a>
     </form>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmarGuardado() {
+        var requiredFields = document.getElementsByClassName('required-field');
+        var missingFields = [];
+
+        for (var i = 0; i < requiredFields.length; i++) {
+            var field = requiredFields[i];
+            if (field.value.trim() === '') {
+                var label = field.previousElementSibling.textContent;
+                missingFields.push(label);
+            }
+        }
+
+        if (missingFields.length > 0) {
+            mostrarAlerta('Los siguientes campos son obligatorios: ' + missingFields.join(', '));
+            return false;
+        }
+
+        return true;
+    }
+
+    function mostrarAlerta(mensaje) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: mensaje,
+            confirmButtonText: 'Aceptar'
+        });
+    }
+
+    function limpiarCampos() {
+        document.getElementById("formulario").reset();
+    }
+</script>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <script>
+        mostrarAlerta('@errorMessage');
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: '@successMessage',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+}
+
+

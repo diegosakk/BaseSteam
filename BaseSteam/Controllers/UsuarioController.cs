@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace BaseSteam.Controllers
 {
@@ -26,10 +27,20 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Create(Usuario usuario)
         {
+
+            var existe = db.Usuarios.Any(c => c.Nombre == usuario.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un usuario con el mismo nombre.";
+                return RedirectToAction("Create");
+            }
+
             db.Add(usuario);
             db.SaveChanges();
-            //return View();
-            return RedirectToAction("Index");
+            TempData["SuccessMessage"] = "usuario creado exitosamente.";
+
+            return RedirectToAction("Create");
         }
         public IActionResult Edit(int? id)
         {

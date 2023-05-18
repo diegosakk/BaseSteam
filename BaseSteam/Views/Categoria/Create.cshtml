@@ -2,17 +2,79 @@
 @{
     ViewData["Title"] = "Crear Categoria";
 }
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+}
 
+<div>
+    <form asp-action="Create" class="col-lg-6 offset-lg-3" id="formulario">
+        <h1>Crear Categoria</h1>
+        <div class="">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control required-field" id="Nombre" asp-for="Nombre" required />
+            <label class="form-label mt-3">Descripcion</label>
+            <input type="text" class="form-control required-field" id="Descripcion" asp-for="Descripcion" maxlength="50" required />
+            <input type="submit" value="Crear" class="btn btn-outline-success mt-3" id="btnAgregar" onclick="return confirmarGuardado()" />
+            <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3" id="btnLimpiar" onclick="return limpiarCampos()" />
+            <a asp-action="index" class="btn btn-outline-primary mt-3">index Categoria</a>
+        </div>
+    </form>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmarGuardado() {
+        var requiredFields = document.getElementsByClassName('required-field');
+        var missingFields = [];
 
-<form asp-action="Create" class="col-lg-6 offset-lg-3">
-    <h1>Crear Categoria</h1>
-    <div class="">
-        <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" asp-for="Nombre" />
-        <label class="form-label mt-3">Descripcion</label>
-        <input type="text" class="form-control" asp-for="Descripcion" />
-        <input type="submit" value="Crear" class="btn btn-outline-success mt-3" />
-        <a asp-action="index" class="btn btn-outline-primary mt-3">index Categoria</a>
-    </div>
-</form>
+        for (var i = 0; i < requiredFields.length; i++) {
+            var field = requiredFields[i];
+            if (field.value.trim() === '') {
+                var label = field.previousElementSibling.textContent;
+                missingFields.push(label);
+            }
+        }
+
+        if (missingFields.length > 0) {
+            mostrarAlerta('Los siguientes campos son obligatorios: ' + missingFields.join(', '));
+            return false;
+        }
+
+        return true;
+    }
+
+    function mostrarAlerta(mensaje) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: mensaje,
+            confirmButtonText: 'Aceptar'
+        });
+    }
+
+    function limpiarCampos() {
+        $('#Nombre').val('');
+        $('#Descripcion').val('');
+    }
+</script>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <script>
+        mostrarAlerta('@errorMessage');
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: '@successMessage',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+}

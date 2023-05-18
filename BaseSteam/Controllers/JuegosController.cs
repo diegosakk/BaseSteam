@@ -30,10 +30,20 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Create(Juego juego)
         {
+
+            var existe = db.Juegos.Any(c => c.Nombre == juego.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un juego con el mismo nombre.";
+                return RedirectToAction("Create");
+            }
+
             db.Add(juego);
             db.SaveChanges();
-            //return View();
-            return RedirectToAction("Index");
+            TempData["SuccessMessage"] = "juego creado exitosamente.";
+
+            return RedirectToAction("Create");
         }
         public IActionResult Edit(int? id)
         {

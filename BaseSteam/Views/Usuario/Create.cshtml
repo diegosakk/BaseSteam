@@ -2,22 +2,114 @@
 @{
     ViewData["Title"] = "Crear Usuario";
 }
+@{
+    var errorMessage = TempData["ErrorMessage"] as string;
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
 <h1>Crear Producto</h1>
 <div class="row">
-    <form asp-action="Create">
+    <form asp-action="Create" id="formulario">
         <label>Nombre</label>
-        <input asp-for="Nombre" class="form-control" />
+        <input asp-for="Nombre" class="form-control required-field" required />
         <label>Rut</label>
-        <input asp-for="Rut" class="form-control" />
+        <input asp-for="Rut" class="form-control required-field" required pattern="^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$" title="Ingrese un RUT válido (ejemplo: 12.345.678-9)" />
         <label>Roles</label>
-        <select asp-for="Roles" class="form-select" asp-items="ViewBag.IdRoles"></select>
-        <label>Telefono</label>
-        <input asp-for="Telefono" class="form-control" />
-        <label>correo</label>
-        <input asp-for="Correo" class="form-control" />
+        <select asp-for="Roles" class="form-select required-field" asp-items="ViewBag.IdRoles"></select>
+        <label>Teléfono</label>
+        <input asp-for="Telefono" type="number" class="form-control required-field" minlength="10" min="1" required />
+        <label>Correo</label>
+        <input asp-for="Correo" type="email" class="form-control required-field" required />
+
         <div class="text-end mt-3">
-            <input type="reset" value="Limpiar" class="btn btn-info" />
-            <input type="submit" value="Guardar" class="btn btn-primary" />
+            <input type="submit" value="Crear" class="btn btn-outline-success mt-3" id="btnAgregar" onclick="return confirmarGuardado()" />
+            <input type="reset" value="Limpiar" class="btn btn-outline-info mt-3" id="btnLimpiar" onclick="return limpiarCampos()" />
         </div>
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function confirmarGuardado() {
+        var requiredFields = document.getElementsByClassName('required-field');
+        var missingFields = [];
+
+        for (var i = 0; i < requiredFields.length; i++) {
+            var field = requiredFields[i];
+            if (field.value.trim() === '') {
+                var label = field.previousElementSibling.textContent;
+                missingFields.push(label);
+            }
+        }
+
+        if (missingFields.length > 0) {
+            mostrarAlerta('Los siguientes campos son obligatorios: ' + missingFields.join(', '));
+            return false;
+        }
+
+        // Validar el formato del RUT
+        var rutInput = document.getElementById('Rut');
+        var rut = rutInput.value.trim();
+        if (!validarRut(rut)) {
+            mostrarAlerta('Ingrese un RUT válido (ejemplo: 12.345.678-9)');
+            rutInput.classList.add('is-invalid');
+            return false;
+        }
+
+        // Validar el formato del correo
+        var correoInput = document.getElementById('Correo');
+        var correo = correoInput.value.trim();
+        if (!validarCorreo(correo)) {
+            mostrarAlerta('Ingrese un correo válido');
+            correoInput.classList.add('is-invalid');
+            return false;
+        }
+
+        return true;
+    }
+
+   
+    function mostrarAlerta(mensaje) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: mensaje,
+            confirmButtonText: 'Aceptar'
+        });
+    }
+
+    function limpiarCampos() {
+        document.getElementById("formulario").reset();
+    }
+
+    function validarRut(rut) {
+        var rutRegex = /^\d{1,2}\.\d{3}\.\d{3}[-][0-9kK]{1}$/;
+        return rutRegex.test(rut);
+    }
+
+    function validarCorreo(correo) {
+        var correoRegex = /^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return correoRegex.test(correo);
+    }
+</script>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <script>
+        mostrarAlerta('@errorMessage');
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: '@successMessage',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+}
+}

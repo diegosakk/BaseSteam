@@ -19,11 +19,24 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Create(Desarrollador desarrollador)
         {
+            // Verificar si ya existe un desarrollador con el mismo nombre
+            var existeDesarrollador = db.Desarrolladors.Any(d => d.Nombre == desarrollador.Nombre);
+            if (existeDesarrollador)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un desarrollador con el mismo nombre.";
+                return RedirectToAction("Create");
+            }
+
             db.Add(desarrollador);
             db.SaveChanges();
-            //return View();
-            return RedirectToAction("index");
+
+            TempData["SuccessMessage"] = "Desarrollador creado exitosamente.";
+
+            return RedirectToAction("Create");
+
         }
+    
         public IActionResult Edit(int? id)
         {
             var desarrollador = db.Desarrolladors.Find(id);

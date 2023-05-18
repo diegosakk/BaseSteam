@@ -18,10 +18,20 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Create(Editor editor)
         {
+
+            var existe = db.Editors.Any(c => c.Nombre == editor.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un editor con el mismo nombre.";
+                return RedirectToAction("Create");
+            }
+
             db.Add(editor);
             db.SaveChanges();
-            //return View();
-            return RedirectToAction("Index");
+            TempData["SuccessMessage"] = "editor creado exitosamente.";
+
+            return RedirectToAction("Create");
         }
         public IActionResult Edit(int? id)
         {

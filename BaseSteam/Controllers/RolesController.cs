@@ -1,4 +1,5 @@
 ﻿using BaseSteam.Models;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BaseSteam.Controllers
@@ -18,10 +19,20 @@ namespace BaseSteam.Controllers
         [HttpPost]
         public IActionResult Create(Role role)
         {
+
+            var existe = db.Roles.Any(c => c.Nombre == role.Nombre);
+            if (existe)
+            {
+                // Mostrar Sweet Alert con mensaje de error
+                TempData["ErrorMessage"] = "Ya existe un rol con el mismo nombre.";
+                return RedirectToAction("Create");
+            }
+
             db.Add(role);
             db.SaveChanges();
-            //return View();
-            return RedirectToAction("index");
+            TempData["SuccessMessage"] = "rol creado exitosamente.";
+
+            return RedirectToAction("Create");
         }
         public IActionResult Edit(int? id)
         {
