@@ -18,7 +18,6 @@ public partial class Juego
 
     public int UsuarioRegistrado { get; set; }
     public virtual Usuario UsuarioRegistradoNavigation { get; set; } = null!;
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 
     public virtual Categorium IdCategoriaNavigation { get; set; } = null!;
     public virtual Desarrollador IdDesarrolladorNavigation { get; set; } = null!;
