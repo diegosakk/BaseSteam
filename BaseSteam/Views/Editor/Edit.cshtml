@@ -6,8 +6,8 @@
     var errorMessage = TempData["ErrorMessage"] as string;
     var successMessage = TempData["SuccessMessage"] as string;
 }
-<h1>Editar Editor</h1>
-<div>
+<div class="container">
+    <div class="card mt-4 rounded-0 mx-auto color-secundario " style="width: 50rem;">
     <form asp-action="Edit" class="col-lg-6 offset-lg-3">
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
@@ -19,11 +19,12 @@
             <input type="text" class="form-control" asp-for="Pais" maxlength="50" required />
         </div>
         <div class="mt-3 text-end">
-            <a asp-action="Index" class="btn btn-outline-info">volver</a>
-            <input type="submit" class="btn btn-outline-info" value="Edit" />
+                <a asp-action="Index" class="btn btn-outline-info mt-3 mb-3">volver</a>
+            <input type="submit" class="btn btn-outline-info mt-3 mb-3" value="Edit" />
         </div>
 
     </form>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
