@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-
-namespace BaseSteam.Models;
+﻿namespace BaseSteam.Models;
 
 public partial class Usuario
 {
@@ -16,10 +12,9 @@ public partial class Usuario
 
     public int Telefono { get; set; }
 
-    public int? Roles { get; set; }
+    public int Roles { get; set; }
+    public virtual Role IdRolesNavigation { get; set; } = null!;
 
     public virtual ICollection<Juego> Juegos { get; set; } = new List<Juego>();
 
-
-    public virtual Role RolesNavigation { get; set; } = null!;
 }

@@ -17,7 +17,7 @@
             <th>Plataforma</th>
             <th>Precio</th>
             <th>Usuario</th>
-            <th></th>
+            <th>Accion</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +31,7 @@
                 <td>@item.IdEditorNavigation.Nombre</td>
                 <td>@item.Plataforma</td>
                 <td>@item.Precio</td>
+                <td>@item.UsuarioRegistradoNavigation.Nombre</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar</a>
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Eliminar</a>

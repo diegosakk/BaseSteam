@@ -10,19 +10,25 @@ namespace BaseSteam.Controllers
         private BaseSteamContext db = new();
         public IActionResult Index()
         {
-            var usuarios = db.Usuarios.Include(u => u.RolesNavigation);
+            var usuarios = db.Usuarios.Include(u => u.IdRolesNavigation);
+            ;
             return View(usuarios);
         }
         public IActionResult Create()
         {
-            ViewData["Rolesss"] = new SelectList(db.Roles, "Id", "Nombre");
+
+            ViewData["IdRoles"] = new SelectList(db.Roles, "Id", "Nombre");
+
+
             return View();
+
         }
         [HttpPost]
         public IActionResult Create(Usuario usuario)
         {
-            db.Usuarios.Add(usuario);
+            db.Add(usuario);
             db.SaveChanges();
+            //return View();
             return RedirectToAction("Index");
         }
         public IActionResult Edit(int? id)

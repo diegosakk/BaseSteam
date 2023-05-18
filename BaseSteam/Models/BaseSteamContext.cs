@@ -148,7 +148,7 @@ public partial class BaseSteamContext : DbContext
                 .HasColumnName("rut");
             entity.Property(e => e.Telefono).HasColumnName("telefono");
 
-            entity.HasOne(d => d.RolesNavigation).WithMany(p => p.Usuarios)
+            entity.HasOne(d => d.IdRolesNavigation).WithMany(p => p.Usuarios)
                 .HasForeignKey(d => d.Roles)
                 .HasConstraintName("FK_Usuario_Roles");
         });

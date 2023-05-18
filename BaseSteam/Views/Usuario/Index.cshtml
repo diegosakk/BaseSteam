@@ -1,23 +1,23 @@
 ﻿@model IEnumerable<BaseSteam.Models.Usuario>
 
-<div class="text-end">
-    <a asp-action="Create" class="btn btn-primary">Crear Usuario</a>
-</div>
+    <div class="text-end">
+        <a asp-action="Create" class="btn btn-primary">Crear Usuario</a>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Desarrollador</th>
-            <th>Rut</th>
-            <th>Correo</th>
-            <th>Telefono</th>
-            <th>Roles</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Desarrollador</th>
+                <th>Rut</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Roles</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
         {
             <tr>
                 <td>@item.Id</td>
@@ -25,15 +25,13 @@
                 <td>@item.Rut</td>
                 <td>@item.Correo</td>
                 <td>@item.Telefono</td>
-                <td>@item.Roles</td>
+                <td>@item.IdRolesNavigation.Nombre</td>
 
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"
-                       class="btn btn-warning"><i class="bi bi-pencil-square"> </i>Editar</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id"
-                       class="btn btn-danger"><i class="bi bi-trash"></i> Eliminar</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Eliminar</a>
                 </td>
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
